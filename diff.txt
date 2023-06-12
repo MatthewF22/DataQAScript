@@ -1,0 +1,39 @@
+CO_CODE:  ,FILEPATH:  ,ISSUE:  
+abcde,cocodeIssue.csv,not numeric in cocode or not 5 digits
+1234w,cocodeIssue.csv,not numeric in cocode or not 5 digits
+1234w,cocodeIssue.csv,cocode order
+13.21 in column 4 ,decimalInFile.csv,check for decimal in numeric field
+12.3 in column 2 ,decimalInFile.csv,check for decimal in numeric field
+22222,doNotSellIssue.csv,do not sell
+23142,doNotSellIssue.csv,cocode order
+""""""
+, in column 2 ,doubleQuoteIssue.csv,check for double quotes
+"1""1"
+, in column 2 ,doubleQuoteIssue.csv,check for double quotes
+""""
+, in column 2 ,doubleQuoteIssue.csv,check for double quotes
+"""flip"
+, in column 2 ,doubleQuoteIssue.csv,check for double quotes
+"flop"""
+, in column 2 ,doubleQuoteIssue.csv,check for double quotes
+"12/""/2019", in column 3 ,allTestFile.csv,check for double quotes
+"1""2", in column 2 ,allTestFile.csv,check for double quotes
+12.4 in column 2 ,allTestFile.csv,check for decimal in numeric field
+12-Jan-21 in column 3 ,allTestFile.csv,check for potential date issue
+sam/ in column 3 ,allTestFile.csv,check for potential date issue
+19/2022 in column 3 ,allTestFile.csv,check for potential date issue
+Feb/19/2022 in column 3 ,allTestFile.csv,check for potential date issue
+"12/""/2019" in column 3 ,allTestFile.csv,check for potential date issue
+123456,allTestFile.csv,not numeric in cocode or not 5 digits
+123456,allTestFile.csv,cocode order
+12-Jan-23 in column 3 ,dateIssues.csv,check for potential date issue
+12-Jan-2020
+ in column 4 ,dateIssues.csv,check for potential date issue
+1/8/2023 in column 3 ,dateIssues.csv,check for potential date issue
+1/3/1999
+ in column 4 ,dateIssues.csv,check for potential date issue
+99987,outOfOrderCocode.csv,cocode order
+
+,theBlankFile.csv,not numeric in cocode or not 5 digits
+BLANK ,theBlankFile.csv,Blank
+,theBlankFile.csv,Size Issue: 2 bytes
