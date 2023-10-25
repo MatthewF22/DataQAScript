@@ -4,7 +4,6 @@ from subprocess import Popen
 import colorama
 from colorama import Fore
 import numpy as np
-
 # ----------User Inputs---------------------------------------------#
 # Define the outer folder with the datafiles you want to validate
 # Make sure any backslashes are doubled -> For example: 'C:\Users' should actually be 'C:\\Users'
@@ -51,7 +50,8 @@ def find_errors(filepath, outfile, dns):
         #Delete new line characters off the ends of the csv file lines
         items = [line[:len(rawItems)] for line in rawItems]
         #print(items)
-        print(Fore.YELLOW + " Amount of Columns: " + str(len(items[0])) + Fore.RESET)
+        print("\033[93mAmount of Columns:\033[0m " + str(len(items[0])) + Fore.RESET)
+        outfile.write("Amount of Columns: " + str(len(items[0])) + '\n')
 
 
     # ---'Double Quote Check' --- Throw if there is a double quote inside the file
@@ -66,10 +66,15 @@ def find_errors(filepath, outfile, dns):
     # ---'Decimal check'--- Throw if there is a numeric field with decimals
     usedCol = []
     for list in items:
-        i = 0
-        for pos in list:
+        i = 3
+        for pos in list[3:]:
             i += 1
-            if pos.__contains__(".") and str(i) not in usedCol:
+            value = pos[:1]
+            if value.isdigit():
+                isNum = True
+            else:
+                isNum = False
+            if pos.__contains__(".") and isNum == True and str(i) not in usedCol:
                 outfile.write(pos + ' in column ' + str(i) + ' ,' + os.path.basename(filepath) + ',check for decimal in numeric field\n')
                 print(pos + ' in column ' + str(i) + ' ,' + os.path.basename(filepath) + ',check for decimal in numeric field\n')
                 usedCol.append(str(i))
@@ -137,14 +142,20 @@ def find_errors(filepath, outfile, dns):
 # For every folder in the Datafiles folder
 for folder in os.listdir(dir):
     print('\nNow validating directory named:', folder)
+    outfile.write("Validating Directory named: " + folder + '\n')
     # For every datafile in the folder
     for filename in os.listdir(os.path.join(dir, folder)):
-        print(Fore.RED + "Checking file: " , filename , "\n" + Fore.RESET)
+        print("--------------------------------------------------------")
+        print("\033[92mChecking file:\033[0m " , filename , "\n")
+        outfile.write("Checking File Fame: " + filename + '\n')
         # Create the filepath for a particular datafile
         filepath = os.path.join(dir, os.path.join(folder, filename))
         # Run that datafile through the find_errors function as defined above
         find_errors(filepath, outfile, dns)
-        print("Done with file: " ,filename, '\n')
+        print("\033[91mDone with file:\033[0m" ,filename, '\n')
+        print("--------------------------------------------------------")
+        print("\033[95mThis is a color\033[0m")
+        outfile.write("---------------------------------------------------------------------" + '\n')
 
 # This opens a csv with that contains any issues with the file
 p = Popen('diff.txt', shell=True)
