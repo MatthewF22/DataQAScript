@@ -154,7 +154,6 @@ for folder in os.listdir(dir):
         find_errors(filepath, outfile, dns)
         print("\033[91mDone with file:\033[0m" ,filename, '\n')
         print("--------------------------------------------------------")
-        print("\033[95mThis is a color\033[0m")
         outfile.write("---------------------------------------------------------------------" + '\n')
 
 # This opens a csv with that contains any issues with the file
